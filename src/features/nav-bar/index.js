@@ -22,7 +22,7 @@ const NavBar = () => {
         history.push("/add");
         break;
       case 2:
-        history.push("leaderboard");
+        history.push("/leaderboard");
         break;
       default:
         history.push("/home");
@@ -38,8 +38,9 @@ const NavBar = () => {
       <Tab label="Home" />
       <Tab label="New Question" />
       <Tab label="Leaderboard" />
-      <Tab label="Logout" onClick={handleLogOut} />
-      <Tab label={authedUser.name} disabled />
+      {authedUser && authedUser.name !== '' && <Tab label="Logout" onClick={handleLogOut} />}
+      {authedUser && authedUser.name !== '' &&<Tab label={authedUser.name} disabled />}
+      )}
     </Tabs>
   );
 };

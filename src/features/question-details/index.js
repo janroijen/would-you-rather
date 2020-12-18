@@ -91,6 +91,7 @@ const QuestionDetails = () => {
               <Typography>Would you rather {optionOne.text}?</Typography>
               <Typography color="textSecondary">
                 {optionOneVotes} out of {optionOneVotes + optionTwoVotes} votes
+                ({Math.round(100 * optionOneVotes / (optionOneVotes + optionTwoVotes))}%)
               </Typography>
               {userAnswer === "optionOne" && (
                 <Avatar style={{ padding: "10px", textAlign: "center" }}>
@@ -102,6 +103,7 @@ const QuestionDetails = () => {
               <Typography>Would you rather {optionTwo.text}?</Typography>
               <Typography color="textSecondary">
                 {optionTwoVotes} out of {optionOneVotes + optionTwoVotes} votes
+                ({Math.round(100 * optionTwoVotes / (optionOneVotes + optionTwoVotes))}%)
               </Typography>
               {userAnswer === "optionTwo" && (
                 <Avatar style={{ padding: "10px", textAlign: "center" }}>

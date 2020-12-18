@@ -44,7 +44,12 @@ const App = () => {
   }
 
   if (!authedUser) {
-    return <Login />;
+    return (
+      <>
+        <NavBar />
+        <Login />
+      </>
+    );
   }
 
   return (

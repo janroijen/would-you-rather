@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { TextField, Button, Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,9 +11,21 @@ const NewQuestion = () => {
   const dispatch = useDispatch();
   const authedUser = useSelector(selectAuthedUser);
   const history = useHistory();
+  const [error, setError] = useState({ optionOne: '', optionTwo: '' });
 
   const handleSubmit = (e, newValue) => {
     e.preventDefault();
+    let error = { optionOne: '', optionTwo: '' }
+    error.optionOne = e.target[0].value.length === 0 ? 'Required' : ''
+    error.optionTwo = e.target[1].value.length === 0 ? 'Required' : ''
+    error.optionTwo = error.optionTwo || 
+      (e.target[0].value.length === e.target[1].value.length ? 'Options must differ' : '')
+
+    if (error.optionOne.length > 0 || error.optionTwo.length > 0) {
+      setError(error)
+      return
+    }
+
     dispatch(
       saveQuestion({
         author: authedUser.id,
@@ -32,11 +44,11 @@ const NewQuestion = () => {
         <form onSubmit={handleSubmit}>
           <p>Would you rather</p>
           <div style={{ marginBottom: "20px" }}>
-            <TextField id="optionOne" fullWidth />
+            <TextField error={error.optionOne.length > 0} label={error.optionOne} id="optionOne" fullWidth />
           </div>
           or
           <div style={{ marginBottom: "20px" }}>
-            <TextField id="optionTwo" fullWidth />
+            <TextField error={error.optionTwo.length > 0} label={error.optionTwo} id="optionTwo" fullWidth />
           </div>
           <Button type="submit" variant="outlined" color="primary">
             Submit
