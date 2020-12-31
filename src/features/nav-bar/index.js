@@ -36,10 +36,14 @@ const NavBar = () => {
   return (
     <Tabs value={tabIndex} onChange={handleTabChange} centered>
       <Tab label="Home" />
-      <Tab label="New Question" />
-      <Tab label="Leaderboard" />
-      {authedUser && authedUser.name !== '' && <Tab label="Logout" onClick={handleLogOut} />}
-      {authedUser && authedUser.name !== '' &&<Tab label={authedUser.name} disabled />}
+      {authedUser && authedUser.name !== "" && <Tab label="New Question" />}
+      {authedUser && authedUser.name !== "" && <Tab label="Leaderboard" />}
+      {authedUser && authedUser.name !== "" && (
+        <Tab label="Logout" onClick={handleLogOut} />
+      )}
+      {authedUser && authedUser.name !== "" && (
+        <Tab label={authedUser.name} disabled />
+      )}
       )}
     </Tabs>
   );
